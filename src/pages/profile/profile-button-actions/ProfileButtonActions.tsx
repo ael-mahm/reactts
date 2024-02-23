@@ -1,6 +1,10 @@
 import "./ProfileButtonActions.css";
 
-const ProfileButtonActions = ({ action }) => {
+interface Props {
+  action: "friend-account" | "others-account" | "personal-account";
+}
+
+const ProfileButtonActions: React.FC<Props> = ({ action }) => {
   // HERE YOU SHOULD TEST FOR THE IDS IF THE IT IS A PROFILE ACCOUNT OR FRIEND ACCOUNT OR OTHERS ACCOUNT
   switch (action) {
     case "friend-account":

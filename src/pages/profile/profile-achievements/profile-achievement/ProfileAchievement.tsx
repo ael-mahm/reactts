@@ -1,6 +1,13 @@
+import React from "react";
 import "./ProfileAchievement.css";
 
-const ProfileAchievement = ({ index, title, isActive }) => {
+interface Props {
+  index: number;
+  title: string;
+  isActive: boolean;
+}
+
+const ProfileAchievement: React.FC<Props> = ({ index, title, isActive }) => {
   const imageSrc = `./images/achievements/trophy-${index}.svg`;
 
   // console.log(isActive);

@@ -1,6 +1,12 @@
+import React from "react";
 import ProfileAchievement from "./profile-achievement/ProfileAchievement";
 import "./ProfileAchievements.css";
-const ProfileAchievements = ({ winnedGames }) => {
+
+interface Props {
+  winnedGames: number;
+}
+
+const ProfileAchievements: React.FC<Props> = ({ winnedGames }) => {
   const levels = [1, 2, 3, 4, 5, 6, 7, 20];
   const levelsLength = levels.length;
   return (

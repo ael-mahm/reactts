@@ -1,6 +1,23 @@
+import React from "react";
 import "./GameHistoryItem.css";
+import { Link } from "react-router-dom";
 
-const GameHistoryItem = ({ gameLog }) => {
+interface Player {
+  username: string;
+  score: number;
+}
+
+interface GameLog {
+  player1: Player;
+  player2: Player;
+  timestamp: number;
+}
+
+interface Props {
+  gameLog: GameLog;
+}
+
+const GameHistoryItem: React.FC<Props> = ({ gameLog }) => {
   const { player1, player2, timestamp } = gameLog;
   const date = new Date(timestamp);
   const year = date.getFullYear();
@@ -10,7 +27,7 @@ const GameHistoryItem = ({ gameLog }) => {
   return (
     <tr>
       <td className={`${player1.score >= player2.score ? "winner" : ""}`}>
-        <a href="#">{player1.username}</a>
+        <Link to={""} >{player1.username}</Link>
       </td>
       <td>{player1.score}</td>
       <td>{player2.score}</td>

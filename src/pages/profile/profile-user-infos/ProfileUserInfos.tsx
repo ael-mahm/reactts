@@ -1,10 +1,10 @@
 import "./ProfileUserInfos.css";
 
-const ProfileUserInfos = () => {
+const ProfileUserInfos: React.FC = () => {
   return (
     <div className="profile-user-infos">
       <div className="profile-user-image">
-        <img src="./images/avatars/member_3.png" alt="user image" />
+        <img src="./images/avatars/member_3.png" alt="user iimage" />
       </div>
 
       <div className="profile-user-description">

@@ -1,21 +1,35 @@
-import {useContext} from 'react';
+// import {useContext} from 'react';
 import GamesHistory from "./games-history/GamesHistory";
 import ProfileAchievements from "./profile-achievements/ProfileAchievements";
 import ProfileButtonActions from "./profile-button-actions/ProfileButtonActions";
 import ProfileUserInfos from "./profile-user-infos/ProfileUserInfos";
-import ConnectedContext from "../../ConnectedContext";
+// import ConnectedContext from "../../ConnectedContext";
 
 import "./Profile.css";
 
-const Profile = () => {
+interface GameLog {
+  player1: {
+    id: number;
+    username: string;
+    score: number;
+  };
+  player2: {
+    id: number;
+    username: string;
+    score: number;
+  };
+  timestamp: string;
+}
 
-  const { connectedUser } = useContext(ConnectedContext);
+const Profile: React.FC  = () => {
 
-  const isConnected = connectedUser?.id ? 'true' : '';
+  // const { connectedUser } = useContext(ConnectedContext);
+
+  // const isConnected = connectedUser?.id ? 'true' : '';
   
   const winnedGames = 2;
 
-  const gamesLog = [
+  const gamesLog: GameLog[] = [
     {
       player1: {
         id: 546,
@@ -269,10 +283,10 @@ const Profile = () => {
     <section className="profile">
       <div className="container">
         <div className="profile-content" data-status="online">
-          <ProfileUserInfos isConnected={isConnected} />
+          <ProfileUserInfos /> {/*/ TODO: isConnected={isConnected} removed from here*/}
           <ProfileButtonActions action={"friend-account"} />
           <ProfileAchievements winnedGames={winnedGames} />
-          {/* <GamesHistory gamesLog={gamesLog} /> */}
+          <GamesHistory gamesLog={gamesLog} />
         </div> 
       </div>
     </section>
