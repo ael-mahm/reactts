@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useRef } from "react";
 import "./GroupInfosStyle.css";
 import { useNavigate  } from "react-router-dom";
 import ConnectedContext from "../../../ConnectedContext";
@@ -100,12 +100,17 @@ const GroupInfos: React.FC<GroupInfosProps> = ({ groupInfos, members_requests })
   const handleQuiteGroup = async (group_id: string) => {
     try {
         const response = await fetch(`http://localhost:3001/room/${user_id}/${group_id}/leaveROOM`, {
-        method: "POST",
-        body: JSON.stringify({ userId: user_id, roomId: group_id }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+          method: "POST",
+          body: JSON.stringify({ userId: user_id, roomId: group_id }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+      const res = await response.json();
+      if (res?.statusCode !== undefined) {
+        throw new Error('Try again, later!');
+      }
       if (!response.ok){
         throw new Error('Try again, later!');
       }
@@ -144,9 +149,9 @@ const GroupInfos: React.FC<GroupInfosProps> = ({ groupInfos, members_requests })
     }
   }
 
-  useEffect(() => {
-    console.log('member send request to the group', members_requests)
-  }, [])
+  // useEffect(() => {
+  //   console.log('member send request to the group', members_requests)
+  // }, [])
 
   // userType = member, visitor
   

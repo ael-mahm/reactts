@@ -128,7 +128,7 @@ const ChatConversationHeader: React.FC<ChatConversationHeaderProps> = ({ convers
             {conversationInfos?.type === "person" && (
               <>
                 <li className="dropdown-item">
-                  <a href="#">
+                  <Link to={""}>
                     <div className="dropdown-item-icon">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -141,7 +141,7 @@ const ChatConversationHeader: React.FC<ChatConversationHeaderProps> = ({ convers
                       </svg>
                     </div>
                     <div className="dropdown-item-title">Profile</div>
-                  </a>
+                  </Link>
                 </li>
                 <li className="dropdown-item">
                   <a href="#">
@@ -182,7 +182,7 @@ const ChatConversationHeader: React.FC<ChatConversationHeaderProps> = ({ convers
             )}
             {conversationInfos?.type === "group" && (
               <li className="dropdown-item">
-                <Link onClick={(e) => e.preventDefault()} to={""}>
+                <Link to={`/group/${conversationInfos.id}`}>
                   <div className="dropdown-item-icon">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -194,7 +194,7 @@ const ChatConversationHeader: React.FC<ChatConversationHeaderProps> = ({ convers
                       />
                     </svg>
                   </div>
-                  <Link to={`/group/${conversationInfos.id}`} className="dropdown-item-title">Settings</Link>
+                  <div className="dropdown-item-title">Settings</div>
                 </Link>
               </li>
             )}

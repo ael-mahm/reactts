@@ -23,8 +23,8 @@ export function ConnectedProvider({ children }) {
   */
 
   const [connectedUser, setConnectedUser] = useLocalStorage("connected-user", {
-    id: "clsnkyxvr0000uu70vkkepknr",
-    username: "abdelmoumen",
+    id: "clsyxjc6b0000uur8ruivmy4l",
+    username: "abdo",
     user_status: "online",
     fullname:'John Doe',
     email:'john@mail.com',

@@ -59,7 +59,8 @@ const Role: React.FC<any> = ({ data, setData }) => {
                   name: prevValue?.name,
                   owner: prevValue?.owner, 
                   admins: prevValue?.admins,
-                  muted_members: [...prevValue?.muted_members, res]
+                  muted_members: [...prevValue?.muted_members, res],
+                  friends_list: prevValue?.friends_list
             }
             });
             toast.success('The member muted successfully!');
@@ -95,7 +96,8 @@ const Role: React.FC<any> = ({ data, setData }) => {
                     name: prevValue?.name,
                     owner: prevValue?.owner, 
                     admins: type === 'admins' ? prevValue?.admins.filter((item: any) => item.id !== res.id) : prevValue?.admins,
-                    muted_members: prevValue?.muted_members
+                    muted_members: prevValue?.muted_members,
+                    friends_list: prevValue?.friends_list
               }
               });
               toast.success('The member is banned successfully!');
@@ -123,6 +125,7 @@ const Role: React.FC<any> = ({ data, setData }) => {
             throw new Error('Try again later!');
           }
           if (res) {
+                console.log('res', res);
                 setData((prevValue: any) => {
                   return {
                   banned_members: prevValue?.banned_members,
@@ -132,8 +135,8 @@ const Role: React.FC<any> = ({ data, setData }) => {
                   name: prevValue?.name,
                   owner: prevValue?.owner, 
                   admins:[...prevValue?.admins, res],
-                  muted_members: prevValue?.muted_members
-                
+                  muted_members: prevValue?.muted_members,
+                  friends_list: prevValue?.friends_list
                 }
                 });
                 toast.success('The member setted as admin successfully!');
@@ -144,8 +147,42 @@ const Role: React.FC<any> = ({ data, setData }) => {
       
   }
 
-  const handleUnsetAdmin = (user_id: string, id: string) => {
-    console.log(user_id, id);
+  const handleUnsetAdmin = async (user_id: string, unsetAdminId: string) => {
+    if (!window.confirm('Are you sure you want to set had bnadm as admin?')) return;
+      try {
+              const response = await fetch(`http://localhost:3001/room/${user_id}/${group_id}/unsetAdmin`, {
+              method: "POST",
+              body: JSON.stringify({ adminId: user_id, roomId: group_id, unsetAdmin: unsetAdminId }),
+              headers: {
+                "Content-Type": "application/json",
+              },
+          });
+          const res = await response.json();
+          if (res?.statusCode !== undefined) {
+            throw new Error('Try again later!');
+          }
+          if (!response.ok){
+            throw new Error('Try again later!');
+          }
+          if (res) {
+                setData((prevValue: any) => {
+                  return {
+                    banned_members: prevValue?.banned_members,
+                    members : [...prevValue?.members, res],
+                    members_requests: prevValue?.members_requests,
+                    type: prevValue?.type, 
+                    name: prevValue?.name,
+                    owner: prevValue?.owner, 
+                    admins:prevValue?.admins.filter((item: any) => item.id !== res.id),
+                    muted_members: prevValue?.muted_members,
+                    friends_list: prevValue?.friends_list
+                }
+                });
+                toast.success('The member setted as admin successfully!');
+            };
+      } catch (error) {
+        toast.error('Try again later!')
+      }
   }
 
   const handleKick = async (user_id: string, kickedUser: any) => {
@@ -176,7 +213,8 @@ const Role: React.FC<any> = ({ data, setData }) => {
                 name: prevValue?.name,
                 owner: prevValue?.owner, 
                 admins: type === 'admins' ? prevValue?.admins.filter((item: any) => item.id !== res.id) : prevValue?.admins,
-                muted_members: prevValue?.muted_members
+                muted_members: prevValue?.muted_members,
+                friends_list: prevValue?.friends_list
             }
           })
         };
@@ -195,7 +233,7 @@ const Role: React.FC<any> = ({ data, setData }) => {
           if (id === user_id) return;
 
           // CHECK OUT IF IT IS NOT A FRIEND DO NOT SHOW TO THE USER THE FOOTER
-          if(friendsList?.indexOf(id) === -1) return; 
+          if(friendsList === undefined || friendsList?.indexOf(id) === -1) return; 
 
           return [
             <li key={`owner-1-${id}`} className="card-button tooltip">
@@ -220,7 +258,7 @@ const Role: React.FC<any> = ({ data, setData }) => {
           if (id === user_id) return;
 
           // CHECK OUT IF IT IS NOT A FRIEND DO NOT SHOW TO THE USER THE FOOTER
-          if(friendsList?.indexOf(id) === -1) return; 
+          if(friendsList === undefined || friendsList?.indexOf(id) === -1) return; 
 
           return [
             <li key={`admins-1-${id}`} className="card-button tooltip">
@@ -295,7 +333,7 @@ const Role: React.FC<any> = ({ data, setData }) => {
           if (id === user_id) return;
 
           // CHECK OUT IF IT IS NOT A FRIEND DO NOT SHOW TO THE USER THE FOOTER
-          if(friendsList?.indexOf(id) === -1)  return; 
+          if(friendsList === undefined || friendsList?.indexOf(id) === -1)  return; 
 
           return [
             <li key={`members-1-${id}`} className="card-button tooltip">

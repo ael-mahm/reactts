@@ -3,10 +3,11 @@ import DataTable from "datatables.net-dt";
 import "datatables.net-dt/css/dataTables.dataTables.css";
 import { useEffect, useRef } from "react";
 import GameHistoryItem from "./game-history-item/GameHistoryItem";
-import "./GamesHistory.css";
+// import "./GamesHistory1.css";
 // import * as DataTable from 'datatables.net';
+import "./GamesHistory.css";
 import 'datatables.net-buttons';
-import 'datatables.net-responsive'
+import 'datatables.net-responsive';
 
 
 const GamesHistory: React.FC<any> = ({ gamesLog }) => {
