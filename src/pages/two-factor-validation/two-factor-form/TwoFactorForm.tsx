@@ -20,7 +20,7 @@ const TwoFactorForm: React.FC = () => {
 		};
 	}, []);
 
-	const handleKeyDown = (e) => {
+	const handleKeyDown = (e:any) => {
 		const input = e.target;
 		const key = e.key;
 
@@ -96,7 +96,7 @@ const TwoFactorForm: React.FC = () => {
 		}
 	};
 
-	const handlePaste = (e) => {
+	const handlePaste = (e:any) => {
 		const input = e.target;
 		const data = e.clipboardData.getData("text");
 
@@ -109,12 +109,12 @@ const TwoFactorForm: React.FC = () => {
 		onInputChange(input, data);
 	};
 
-	const isConnectedInput = (input) => {
+	const isConnectedInput = (input:any) => {
 		const parent = input?.closest("[data-connected-inputs]");
 		return input?.matches("input") && parent != null;
 	};
 
-	const onInputChange = (input, newValue) => {
+	const onInputChange = (input: any, newValue: any) => {
 		const start = input?.selectionStart;
 		const end = input?.selectionEnd;
 
@@ -123,7 +123,7 @@ const TwoFactorForm: React.FC = () => {
 		focusInput(input, newValue.length + start);
 	};
 
-	const updateInputValue = (input, extraValue, start = 0, end = 0) => {
+	const updateInputValue = (input: any, extraValue:any, start = 0, end = 0) => {
 		const newValue = `${input?.value.substring(
 			0,
 			start,
@@ -141,7 +141,7 @@ const TwoFactorForm: React.FC = () => {
 		}
 	};
 
-	const focusInput = (input, dataLength) => {
+	const focusInput = (input: any, dataLength: any) => {
 		let addedCharacters = dataLength;
 		let currentInput = input;
 
