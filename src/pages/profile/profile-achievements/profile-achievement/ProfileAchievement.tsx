@@ -8,14 +8,14 @@ interface Props {
 }
 
 const ProfileAchievement: React.FC<Props> = ({ index, title, isActive }) => {
-  const imageSrc = `./images/achievements/trophy-${index}.svg`;
+  const imageSrc = `/images/achievements/trophy-${index}.svg`;
 
   // console.log(isActive);
 
   return (
     <div className={`achievement ${isActive ? "active" : ""}`}>
       <div className="achievement-image">
-        <img src={imageSrc} alt="trophy icon" />
+        <img src={`${process.env.PUBLIC_URL + imageSrc}`} alt="trophy icon" />
       </div>
       <div className="achievement-title">
         Win <br />

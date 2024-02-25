@@ -1,7 +1,8 @@
+import React from 'react';
 import TwoFactorForm from "./two-factor-form/TwoFactorForm";
 import "./TwoFactorValidation.css";
 
-const TwoFactorValidation = () => {
+const TwoFactorValidation: React.FC = () => {
 	return (
 		<section className="two-factor-validation-section container">
 			<div className="two-factor-validation-content">

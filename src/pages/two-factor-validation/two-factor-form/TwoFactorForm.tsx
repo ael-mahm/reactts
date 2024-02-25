@@ -1,9 +1,9 @@
 import React, { useRef, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
-
 import "./TwoFactorFormStyle.css";
-const TwoFactorForm = () => {
-	const inputs = useRef([]);
+
+const TwoFactorForm: React.FC = () => {
+	const inputs = useRef<HTMLInputElement[]>([]);
 
 	useEffect(() => {
 		inputs?.current.forEach((input, index) => {
@@ -187,7 +187,7 @@ const TwoFactorForm = () => {
 						key={`key-${index}`}
 						maxLength={1}
 						type="text"
-						ref={(el) => (inputs.current[index] = el)}
+						ref={(el: any) => (inputs.current[index] = el)}
 						className="two-factor-input"
 					/>
 				))}
