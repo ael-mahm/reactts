@@ -3,7 +3,7 @@ import CardFooter from "./card-footer/CardFooter";
 import "./CardItemStyle.css";
 import { useEffect } from "react";
 
-const CardItem = ({ data, footerButtons }) => {
+const CardItem: React.FC<any> = ({ data, footerButtons }) => {
 
   useEffect(() => {
   }, [])
@@ -13,7 +13,7 @@ const CardItem = ({ data, footerButtons }) => {
       <div className="card-body">
         <div className="card-infos">
           <div className="card-images">
-            {data?.images?.map((image, index) => (
+            {data?.images?.map((image: any, index: number) => (
               <img key={`key-${index}`} src={process.env.PUBLIC_URL + image} alt="person avatar" />
             ))}
           </div>
